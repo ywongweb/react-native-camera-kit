@@ -59,7 +59,7 @@ public class BarcodeFrame extends View {
         width = getMeasuredWidth();
         height = getMeasuredHeight();
         int marginWidth = width / WIDTH_SCALE;
-        int marginHeight = (int) (height / HEIGHT_SCALE);
+        int marginHeight = (int) (height / HEIGHT_SCALE - 300);
 
         frameRect.left = marginWidth;
         frameRect.right = width - marginWidth;
