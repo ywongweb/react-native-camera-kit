@@ -108,6 +108,15 @@ public class SaveImageTask extends AsyncTask<byte[], Void, Void> {
             return null;
         }
 
+        int jpegQuality = CameraViewManager.getJpegQuality();
+        if (jpegQuality < 100) {
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            image.compress(Bitmap.CompressFormat.JPEG, jpegQuality, os);
+
+            byte[] array = os.toByteArray();
+            image = BitmapFactory.decodeByteArray(array, 0, array.length);
+        }
+
         WritableMap imageInfo = saveToCameraRoll ? saveToMediaStore(image) : saveTempImageFile(image);
         if (imageInfo == null)
             promise.reject("CameraKit", "failed to save image to MediaStore");
